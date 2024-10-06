@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservices-ingress
+  annotations:
+    kubernetes.io/ingress.class: "gce"  # Use GCP's Ingress Controller
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /course
+            pathType: Prefix
+            backend:
+              service:
+                name: course-service
+                port:
+                  number: 80
+          - path: /blog
+            pathType: Prefix
+            backend:
+              service:
+                name: blog-service
+                port:
+                  number: 80
